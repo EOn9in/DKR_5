@@ -64,27 +64,30 @@ def quickSort():
         alist.append(line.rstrip())
     mass = alist
     f.close()
-    if len(mass) <= 1:
-       return mass
-    else:
-       q = random.choice(mass)
-       s_nums = []
-       m_nums = []
-       e_nums = []
-       for n in mass:
-           if n < q:
-               s_nums.append(n)
-           elif n > q:
-               m_nums.append(n)
-           else:
-               e_nums.append(n)
-    w.write(''.join(str(s_nums + m_nums + e_nums)))
+    m = str(sorted(mass))
+    w.write(m)
     w.close()
     stop  = time.perf_counter()
     itog = stop - start
     print(itog)
     messagebox.showinfo('Время выполнения',f'{itog}')
-    return w
+
+def quickSort_ub():
+    start = time.perf_counter()
+    f = open('input.txt',encoding = 'utf-8')
+    w = open("out.txt","w")
+    alist = []
+    for line in f:
+        alist.append(line.rstrip())
+    mass = alist
+    f.close()
+    m = str(sorted(mass,reverse=True))
+    w.write(m)
+    w.close()
+    stop  = time.perf_counter()
+    itog = stop - start
+    print(itog)
+    messagebox.showinfo('Время выполнения',f'{itog}')
     
     
 
@@ -127,7 +130,7 @@ btnk.pack(fill =X)
 butn = Button(frame,text = 'Быстрая сортировка (по возрастанию)',command = quickSort)
 butn.pack(fill =X)
 
-butnn= Button(frame,text = 'Быстрая сортировка (по убыванию)',command = quickSort)
+butnn= Button(frame,text = 'Быстрая сортировка (по убыванию)',command = quickSort_ub)
 butnn.pack(fill =X)
 
 buttonEg = Button (frame, text='Выход',command=ExitApp)
