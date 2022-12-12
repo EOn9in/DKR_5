@@ -22,11 +22,13 @@ def vstavki_sort():
     n = len(alist)
     mass = alist
     f.close()
-    for i in range(len(mass)):
-        for j in range(n - i - 1):
-            if mass[j] > mass[j + 1]:
-                mass[j], mass[j + 1] = mass[j + 1], mass[j]
-            i -= 1
+    for i in range(1, len(mass)):
+        temp = mass[i]
+        j = i - 1
+        while (j >= 0 and temp < mass[j]):
+            mass[j + 1] = mass[j]
+            j = j - 1
+        mass[j + 1] = temp
     w.write(str(mass))
     w.close()
     stop = time.perf_counter()
