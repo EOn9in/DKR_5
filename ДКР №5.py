@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 import random
-from time import * 
+import time
 def file():
     with open('input.txt', 'w', encoding='utf-8') as file:
         for i in range(100):
@@ -11,29 +11,59 @@ def file():
     return file
 
 def vstavki_sort():
+    start = time.perf_counter()
     f = open('input.txt',encoding = 'utf-8')
     w = open("out.txt","w",encoding='utf-8')
     alist = []
     for line in f:
         alist.append(line.rstrip())
     n = len(alist)
-    w.write(f'Первоначальный массив: {alist}')
+    mass = alist
     f.close()
-    for i in range(n):
+    for i in range(len(mass)):
         for j in range(n-i-1):
-            if alist[j] > alist[j+1]:
-                alist[j], alist[j+1] = alist[j+1], alist[j]
+            if mass[j] > mass[j+1]:
+                mass[j], mass[j+1] = mass[j+1], mass[j]
             i -= 1
-    for i in alist:
-        w.write(str(alist[i]))
+    w.write(str(mass))
     w.close()
+    stop  = time.perf_counter()
+    itog = stop - start
+    print(itog)
+    messagebox.showinfo('Время выполнения',f'{itog}')
 
+def vstavki_sort_ub():
+    start = time.perf_counter()
+    f = open('input.txt',encoding = 'utf-8')
+    w = open("out.txt","w",encoding='utf-8')
+    alist = []
+    for line in f:
+        alist.append(line.rstrip())
+    n = len(alist)
+    mass = alist
+    f.close()
+    for i in range(len(mass)):
+        for j in range(n-i-1):
+            if mass[j] < mass[j+1]:
+                mass[j], mass[j+1] = mass[j+1], mass[j]
+            i -= 1
+    w.write(str(mass))
+    w.close()
+    stop  = time.perf_counter()
+    itog = stop - start
+    print(itog)
+    messagebox.showinfo('Время выполнения',f'{itog}')
 
 
 def quickSort():
+    start = time.perf_counter()
     f = open('input.txt',encoding = 'utf-8')
     w = open("out.txt","w")
-    mass = f.readline()
+    alist = []
+    for line in f:
+        alist.append(line.rstrip())
+    mass = alist
+    f.close()
     if len(mass) <= 1:
        return mass
     else:
@@ -49,8 +79,11 @@ def quickSort():
            else:
                e_nums.append(n)
     w.write(''.join(str(s_nums + m_nums + e_nums)))
-    f.close()
     w.close()
+    stop  = time.perf_counter()
+    itog = stop - start
+    print(itog)
+    messagebox.showinfo('Время выполнения',f'{itog}')
     return w
     
     
